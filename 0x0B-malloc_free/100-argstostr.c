@@ -1,43 +1,52 @@
 #include "main.h"
 #include <stdlib.h>
-#include <stdio.h>
-/**
- * argstostr - concatenate args
- * @ac: argument
- * @av: double pointer to arr
- * Return: Null /pntr
- */
 
+/**
+ * argstostr - concatenates args
+ * @ac: args
+ * @av: args
+ *
+ * Return: pointer to arr
+ */
 char *argstostr(int ac, char **av)
 {
-	char *a, *retp;
-	int k, f, tot;
+	char *aout;
+	int a, f, j, ij;
 
-	if (ac == 0 || av == NULL)
+	if (ac == 0)
 		return (NULL);
 
-	for (k = 0, tot = 0; k < ac; k++)
+	for (a = f = 0; f < ac; f++)
 	{
-		for (f = 0; *(*(av + k) + f) != '\0'; f++, tot++)
-		tot++;
-	}
-	tot++;
+		if (av[f] == NULL)
+			return (NULL);
 
-	a = malloc(tot * sizeof(char));
-	if (a == NULL)
-		return (NULL);
-
-	retp = a;
-	for (k = 0; f < ac; k++)
-	{
-		for (f = 0; av[k][f] != '\0'; f++)
-		{
-			*a = av[k][f];
+		for (j = 0; av[f][j] != '\0'; j++)
 			a++;
-		}
-		*a = '\n';
 		a++;
 	}
 
-	return (retp);
+	aout = malloc((a + 1) * sizeof(char));
+
+	if (aout == NULL)
+	{
+		free(aout);
+		return (NULL);
+	}
+
+	for (f = j = ij = 0; ij < a; j++, ij++)
+	{
+		if (av[f][j] == '\0')
+		{
+			aout[ij] = '\n';
+			f++;
+			ij++;
+			j = 0;
+		}
+		if (ij < a - 1)
+			aout[ij] = av[f][j];
+	}
+	aout[ij] = '\0';
+
+	return (aout);
 }
