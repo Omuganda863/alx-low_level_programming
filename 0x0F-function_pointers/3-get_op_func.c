@@ -1,8 +1,9 @@
 #include "3-calc.h"
+#include <string.h>
 
 /**
- * get_op_func - selects the function
- * @s: char
+ * get_op_func - operator
+ * @s: pointer
  *
  * Return: pointer
  */
@@ -16,14 +17,14 @@ int (*get_op_func(char *s))(int, int)
 		{"%", op_mod},
 		{NULL, NULL}
 	};
-	int a = 0;
+	int a;
 
-	while (a < 10)
+	a = 0;
+	while (ops[a].op != NULL)
 	{
-		if (s[0] == ops->op[a])
+		if (strcmp(s, ops[a].op) == 0)
 			break;
 		a++;
 	}
-
-	return (ops[a / 2].f);
+	return (ops[a].f);
 }
