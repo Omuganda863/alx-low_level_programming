@@ -1,13 +1,16 @@
 #include "main.h"
-
 /**
- * get_endianness - machine checker
- * Return: 0 
+ * get_endianness - endianness checker
+ *
+ * Return: 0
  */
 int get_endianness(void)
 {
-	unsigned int a = 1;
-	char *b = (char *) &a;
+	unsigned int a;
+	char *b;
 
-	return (*b);
+	a = 1;
+	b = (char *) &a;
+
+	return ((int)*b);
 }
